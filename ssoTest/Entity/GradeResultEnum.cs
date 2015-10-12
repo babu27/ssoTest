@@ -1,4 +1,6 @@
-﻿namespace ssoTest.Entity
+﻿using System.Configuration;
+
+namespace ssoTest.Entity
 {
     public static class GradeResultEnum
     {
@@ -11,7 +13,14 @@
         public const string Svcunavailable0000000000 = "svcunavailable0000000000";
 
     }
+
+    public static class Grade
+    {
+        public static string TokenName
+        {
+            get { return ConfigurationManager.AppSettings["TokenName"] ?? "SsoToken"; }
+        }
+    }
 }
-        
-        
-        
+
+

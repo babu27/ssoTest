@@ -1,4 +1,6 @@
-﻿namespace ssoTest
+﻿using ssoTest.Entity;
+
+namespace ssoTest
 {
     public class GradeResultHelper
     {
