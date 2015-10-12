@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
+using ssoTest.Business;
 
 namespace ssoTest.Controllers.Api
 {
@@ -42,7 +44,9 @@ namespace ssoTest.Controllers.Api
         [HttpPost]
         public HttpResponseMessage ssoauth([FromBody] string ssoToken)
         {
-            return Request.CreateResponse(HttpStatusCode.OK,new { AdminUserId = "p", Result = "0000" });
+            var result = new GradeBusiness().GetGradeResponse(ssoToken);
+
+            return Request.CreateResponse(HttpStatusCode.OK, result,new JsonMediaTypeFormatter());
         }
     }
 }

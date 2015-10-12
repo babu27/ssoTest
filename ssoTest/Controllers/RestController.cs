@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using ssoTest.Business;
 
 namespace ssoTest.Controllers
 {
@@ -6,10 +7,9 @@ namespace ssoTest.Controllers
     {
         public ActionResult SsoAuth(string ssoTken)
         {
-            ViewBag.AdminUserId = "p";//assigned based on the input value
-            ViewBag.Result = "0000"; // assigned based on the input value.
+            var result = new GradeBusiness().GetGradeResponse(ssoTken);
 
-            return View(ssoTken);
+            return View(result);
         }
     }
 }

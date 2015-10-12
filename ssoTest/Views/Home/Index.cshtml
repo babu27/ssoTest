@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Grade API Simulator";
 }
 
 
     <h1>Grade API Mock</h1>
     <p>HTTP POST to /ssoauth</p>
-    <form method="post" action="/rest/ssoauth">
-        <select name="accountId">
+    <form method="post" action="@Url.Action("SsoAuth","Rest")">
+        <select name="ssoToken">
             <option value="valid0000000000000000000">Valid OTP</option>
             <option value="unknown00000000000000000">Parameter Not Valid</option>
             <option value="invalid00000000000000000">Invalid OTP</option>

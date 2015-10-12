@@ -1,17 +1,21 @@
-﻿@{
+﻿@using System.Linq.Expressions
+@model ssoTest.Entity.GradeResponse
+           
+
+@{
+    ViewBag.Title = "Grade API Testing";
     Layout = null;
 }
 
-<!DOCTYPE html>
+@Print(()=>Model.AdminUserId)
+@Print(()=>Model.Result)
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SsoAuth</title>
-</head>
-<body>
-    <div>
-        
-    </div>
-</body>
-</html>
+@functions
+{
+
+    private static string Print<T>(Expression<Func<T>> expression)
+    {
+        return string.Format("{0} = {1} ", ((MemberExpression) expression.Body).Member.Name, expression.Compile()());
+    }
+
+}
