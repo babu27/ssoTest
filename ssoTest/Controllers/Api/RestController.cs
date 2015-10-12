@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace ssoTest.Controllers.Api
 {
@@ -38,9 +40,9 @@ namespace ssoTest.Controllers.Api
         }
 
         [HttpPost]
-        public object ssoauth([FromBody] string ssoToken)
+        public HttpResponseMessage ssoauth([FromBody] string ssoToken)
         {
-            return new { AdminUserId = "p", Result = "0000" };
+            return Request.CreateResponse(HttpStatusCode.OK,new { AdminUserId = "p", Result = "0000" });
         }
     }
 }
