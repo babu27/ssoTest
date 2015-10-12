@@ -16,6 +16,7 @@ namespace ssoTest.Controllers
             if (!Enum.TryParse(result.StatusCode, out code))
                 code = HttpStatusCode.OK;
 
+            Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)code;
 
             return View(result);
