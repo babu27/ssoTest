@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using ssoTest.Entity;
+﻿using ssoTest.Entity;
 
 namespace ssoTest.Business
 {
     public class GradeBusiness
     {
-        public GradeResponse GetGradeResponse(string ssoToken)
+        public GradeResponse GetGradeResponse(string ssoToken,string ssoTokenName="SsoToken")
         {
-            var adminUserId = ConfigurationManager.AppSettings["AdminUserId"] ?? "p";
+            var adminUserId = ConfigHelper.GetUserForTheToken(ssoTokenName);
 
             var result = new GradeResponse { Result = "0000" };
 

@@ -49,6 +49,7 @@ namespace ssoTest.Controllers.Api
         public HttpResponseMessage ssoauth()
         {
             var ssoToken = string.Empty;
+            var ssoTokenName = string.Empty;
 
             using (var requestStream = HttpContext.Current.Request.InputStream)
             {
@@ -60,15 +61,16 @@ namespace ssoTest.Controllers.Api
                 {
                     var ary=rawBody.Split("=".ToCharArray());
 
-                    if(ary.Length!=2 || ary[0]!=Grade.TokenName)
+                    if (ary.Length != 2 || !ConfigHelper.IsValidToken(ary[0]))
                         return Request.CreateErrorResponse(HttpStatusCode.Unauthorized,new Exception("testing"));
 
                     ssoToken = ary[1];
+                    ssoTokenName = ary[0];
 
                 }
             }
 
-            var result = new GradeBusiness().GetGradeResponse(ssoToken);
+            var result = new GradeBusiness().GetGradeResponse(ssoToken, ssoTokenName);
 
             HttpStatusCode code;
 
