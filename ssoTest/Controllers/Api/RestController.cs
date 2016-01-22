@@ -59,7 +59,7 @@ namespace ssoTest.Controllers.Api
 
                 if (!string.IsNullOrEmpty(rawBody))
                 {
-                    var ary=rawBody.Split("=".ToCharArray());
+                    var ary=rawBody.Split("=".ToCharArray(),2);
 
                     if (ary.Length != 2 || !ConfigHelper.IsValidToken(ary[0]))
                         return Request.CreateErrorResponse(HttpStatusCode.Unauthorized,new Exception("testing"));

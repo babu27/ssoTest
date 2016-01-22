@@ -50,6 +50,11 @@ namespace ssoTest
         {
             return GetUserAndTokens().AllKeys.Contains(token);
         }
+
+        public static string ValidTokenValue()
+        {
+            return ConfigurationManager.AppSettings["ValidTokenValue"];
+        }
     }
 
     

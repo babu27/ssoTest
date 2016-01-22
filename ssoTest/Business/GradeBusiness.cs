@@ -4,20 +4,30 @@ namespace ssoTest.Business
 {
     public class GradeBusiness
     {
-        public GradeResponse GetGradeResponse(string ssoToken,string ssoTokenName="SsoToken")
+        public GradeResponse GetGradeResponse(string ssoToken, string ssoTokenName = "SsoToken")
         {
             var adminUserId = ConfigHelper.GetUserForTheToken(ssoTokenName);
 
-            var result = new GradeResponse { Result = "0000" };
+            var result = new GradeResponse { Result = "0001" };
+
+            if (ConfigHelper.ValidTokenValue() == ssoToken)
+            {
+                return new GradeResponse
+                {
+                    Result = "0000",
+                    StatusCode = "200",
+                    AdminUserId = adminUserId
+                };
+            }
 
             switch (ssoToken)
             {
                 case GradeResultEnum.Gradeerror00000000000000:
-                    result.Result="2050";
+                    result.Result = "2050";
                     result.StatusCode = "400";
                     break;
                 case GradeResultEnum.Invalid00000000000000000:
-                    result.Result="0001";
+                    result.Result = "0001";
                     result.StatusCode = "200";
                     break;
                 case GradeResultEnum.Remotedberror00000000000:
@@ -29,7 +39,7 @@ namespace ssoTest.Business
                     result.StatusCode = "500";
                     break;
                 case GradeResultEnum.Svcunavailable0000000000:
-                    result.Result="";
+                    result.Result = "";
                     result.StatusCode = "503";
                     break;
                 case GradeResultEnum.Unknown00000000000000000:
@@ -37,7 +47,8 @@ namespace ssoTest.Business
                     result.StatusCode = "400";
                     break;
                 case GradeResultEnum.Valid0000000000000000000:
-                    result.Result="0000";
+                case GradeResultEnum.ValidUrlEscaped000000000:
+                    result.Result = "0000";
                     result.StatusCode = "200";
                     result.AdminUserId = adminUserId;
                     break;
